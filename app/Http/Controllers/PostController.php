@@ -59,4 +59,44 @@ class PostController extends Controller
         $post->restore();
         dd('restore');
     }
+
+    public function firstOrCreate()
+    {
+        $anotherPost = [
+            'title' => 'title 1 first',
+            'content' => 'content 1 first',
+            'image' => 'image 1 first',
+            'likes' => 100,
+            'is_published' => 1,
+        ];
+
+        $post = Post::firstOrCreate([
+            'title' => 'title 12',
+        ],[
+            'title' => 'title 1 first',
+            'content' => 'content 1 first',
+            'image' => 'image 1 first',
+            'likes' => 100,
+            'is_published' => 1,
+        ]);
+        dump($post->content);
+        dd('end');
+    }
+
+    public function updateOrCreate()
+    {
+        $post = Post::updateOrCreate([
+            'title' => '1title 1 first',
+        ],[
+            'title' => 'title 1 first',
+            'content' => '1content 1 first',
+            'image' => 'image 1 first',
+            'likes' => 100,
+            'is_published' => 1,
+        ]);
+        dump($post->content);
+
+        dd('end');
+    }
+
 }
