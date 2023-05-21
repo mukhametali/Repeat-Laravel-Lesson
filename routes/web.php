@@ -30,7 +30,7 @@ Route::get('/', function () {
 //        'var1' => $name
 //    ]);
      return view('home', compact('res', 'name'));
-});
+})->name('home');
 
 Route::get('/about', function () {
     return '<h1>About page</h1>';
@@ -54,7 +54,7 @@ Route::get('/about', function () {
 //    return view('contact');
 //});
 
-Route::match(['post', 'get'], '/contact', function () {
+Route::match(['post', 'get','put'], '/contact', function () {
     if (!empty($_POST)) {
         dump($_POST);
     }
@@ -66,3 +66,42 @@ Route::view('test','test', ['test' => 'Test data']);
 //Route::redirect('/about','contact');
 //Route::redirect('/about','contact',301);
 Route::permanentRedirect('/about','contact');
+
+//Route::get('/post/{id}', function ($id) {
+//    return "Post $id";
+//});
+//
+//Route::get('/post/{id}/{slug}', function ($id, $slug) {
+//    return "Post $id | $slug";
+//})->where(['id','[0-9]+', 'slug' => '[A-Za-z0-9-]+']);
+
+//Route::get('/post/{id}/{slug}', function ($id, $slug) {
+//    return "Post $id | $slug";
+//});
+
+Route::get('/post/{id?}/{slug?}', function ($id, $slug = null) {
+    return "Post $id | $slug";
+})->name('post');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/posts', function () {
+        return 'Posts list';
+    });
+
+    Route::get('/post/create', function () {
+        return 'Post Create';
+    });
+
+    Route::get('/post/{id}/edit', function ($id) {
+        return "Edit post $id";
+    })->name('post');
+});
+
+Route::fallback(function () {
+//    return redirect()->route('home');
+    abort(404,'Oops! Page not found');
+});
+
+
+
+
