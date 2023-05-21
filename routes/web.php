@@ -13,6 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+//Route::get('/', function () {
+//       return 'Hello world';
+//});
+
 Route::get('/', function () {
-    return view('welcome');
+    $res = 2 + 3;
+    $name = 'Ali';
+
+//    return view('home', [
+//        'var' => $res,
+//        'var1' => $name
+//    ]);
+     return view('home', compact('res', 'name'));
+});
+
+Route::get('/about', function () {
+    return '<h1>About page</h1>';
 });
