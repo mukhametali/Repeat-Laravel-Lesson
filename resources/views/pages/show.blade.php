@@ -8,10 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Hello, World!</h1>
 
-{{ $res }} <br>
+<h1>{{ $slug }} page</h1>
 
-{{ $name }}
 </body>
 </html>
