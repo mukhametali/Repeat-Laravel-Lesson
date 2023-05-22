@@ -6,9 +6,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $res = 'Get';
-        $name = 'Ali';
-        return view('home',compact('res','name'));
+        dump($_ENV['MY_SETTING']);
+        dump($_ENV);
+        return view('home');
     }
 
     public function test()
