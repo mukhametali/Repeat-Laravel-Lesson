@@ -26,6 +26,10 @@ class Post extends Model
         'content' => 'Content 2'
     ];*/
 
+    public function rubric()
+    {
+        return $this->belongsTo(Rubric::class, 'rubric_my_id');
+    }
 
 
 
