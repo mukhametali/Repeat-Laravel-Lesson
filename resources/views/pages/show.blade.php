@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1>{{ $slug }} page</h1>
+<h1> page</h1>
 
 </body>
 </html>

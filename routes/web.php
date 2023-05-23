@@ -13,23 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','HomeController@index');
-Route::get('/test','HomeController@test');
-Route::get('/test2','Test\TestController@index');
-Route::get('/page/{slug}','PageController@show');
+Route::get('/','HomeController@index')->name('home');
+Route::get('/page/about','PageController@show')->name('page.about');
 
-
-Route::resource('/posts','PostController', ['parameters' => [
-    'posts' => 'slug',
-]]);
-
-
-
-
-Route::fallback(function () {
-//    return redirect()->route('home');
-    abort(404,'Oops! Page not found');
-});
 
 
 
