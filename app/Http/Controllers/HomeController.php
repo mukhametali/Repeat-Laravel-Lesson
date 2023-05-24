@@ -12,8 +12,40 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        /*$request->session()->put('test', 'Test value');
+        session([
+            'cart' => [
+                [
+                    'id' => 1,
+                    'title' => 'Product 1'
+                ],
+                [
+                    'id' => 2,
+                    'title' => 'Product 2'
+                ],
+
+            ]
+        ]);*/
+
+        /*dump(session('test'));
+        dump(session('cart')[1]['title']);
+        dump($request->session()->get('cart')[0]['title']);
+        dump($request->session()->all());*/
+
+        /*$request->session()->push('cart', ['id' => 3, 'title' => 'Product 3']);*/
+
+        /* dump($request->session()->pull('test'));*/
+
+        /*$request->session()->forget('test');*/
+
+        /*$request->session()->flush();*/
+
+
+
+        /*dump(session()->all());*/
+
         $posts = Post::orderBy('id','desc')->get();
         $title =  'Home Page';
         return view('home', compact('title','posts'));
@@ -34,24 +66,11 @@ class HomeController extends Controller
             'rubric_id' => 'integer'
         ]);
 
-        /*$rules = [
-            'title' => 'required|min:5|max:100',
-            'content' => 'required',
-            'rubric_id' => 'integer'
-        ];
-        $messageErrors = [
-            'title.required' => 'Заполните поле название',
-            'title.min' => 'Название должно быть минимум 5 символов',
-            'title.max' => 'Название не должно превышать 100 символов',
-            'content.required' => 'Заполните текст',
-            'rubric_id.integer' => 'Выберите рубрику из списка',
-        ];*/
-
-
-
-        $validator = Validator::make($request->all())->validate();
 
         Post::create($request->all());
+
+        $request->session()->flash('success', 'Данные сохранены!');
+
         return redirect()->route('home');
     }
 }
