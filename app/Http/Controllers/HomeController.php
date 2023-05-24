@@ -7,6 +7,8 @@ use App\Models\Post;
 use App\Models\Rubric;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,39 +16,37 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        /*$request->session()->put('test', 'Test value');
-        session([
-            'cart' => [
-                [
-                    'id' => 1,
-                    'title' => 'Product 1'
-                ],
-                [
-                    'id' => 2,
-                    'title' => 'Product 2'
-                ],
+        /*Cookie::queue('test', 'Test cookie', 5);*/
+        /*Cookie::queue(Cookie::forget('test'));*/
+        /*dump(Cookie::get('test'));*/
+        /*dump(Cookie::get('test'));
+        dump($request->cookie('test'));*/
 
-            ]
-        ]);*/
+        /*Cache::put('key','Value');*/
 
-        /*dump(session('test'));
-        dump(session('cart')[1]['title']);
-        dump($request->session()->get('cart')[0]['title']);
-        dump($request->session()->all());*/
-
-        /*$request->session()->push('cart', ['id' => 3, 'title' => 'Product 3']);*/
-
-        /* dump($request->session()->pull('test'));*/
-
-        /*$request->session()->forget('test');*/
-
-        /*$request->session()->flush();*/
+        /*dump(Cache::get('key'));*/
 
 
+        /*Cache::put('key','Value',300);*/
 
-        /*dump(session()->all());*/
+        /*Cache::flush();*/
 
-        $posts = Post::orderBy('id','desc')->get();
+        /*Cache::forget('key');
+        dump(Cache::get('key'));*/
+
+        /*dump(Cache::pull('key'));
+        dump(Cache::get('key'));*/
+
+
+        if (Cache::has('posts'))
+        {
+            $posts = Cache::get('posts');
+        } else
+        {
+            $posts = Post::orderBy('id','desc')->get();
+            Cache::put('posts', $posts);
+        }
+
         $title =  'Home Page';
         return view('home', compact('title','posts'));
     }
