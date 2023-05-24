@@ -16,16 +16,9 @@ class Post extends Model
 {
     use HasFactory;
 
-//    protected $primaryKey = 'post_id';
-//    public $incrementing = false;
-//    protected $keyType = 'string';
-//    public $timestamps = false;
-
-    protected $fillable = ['title','content'];
+    protected $fillable = ['title','content','rubric_id'];
     protected $table = 'posts';
-    /*protected $attributes = [
-        'content' => 'Content 2'
-    ];*/
+
 
     public function rubric()
     {
