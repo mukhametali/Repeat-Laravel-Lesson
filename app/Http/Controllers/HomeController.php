@@ -12,16 +12,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-
+        $posts = Post::orderBy('id','desc')->get();
         $title =  'Home Page';
-        $h1 = '<h1>home page</h1>';
-        $data1 = range(1,20);
-        $data2 = [
-            'title' => 'Title',
-            'content' => 'Content',
-            'keys' => 'Keywords',
-        ];
-        return view('home', compact('title','h1','data1','data2'));
+        return view('home', compact('title','posts'));
     }
 
     public function test()
