@@ -49,3 +49,9 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script>
+        // alert(111);
+    </script>
+@endsection

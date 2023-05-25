@@ -16,27 +16,6 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        /*Cookie::queue('test', 'Test cookie', 5);*/
-        /*Cookie::queue(Cookie::forget('test'));*/
-        /*dump(Cookie::get('test'));*/
-        /*dump(Cookie::get('test'));
-        dump($request->cookie('test'));*/
-
-        /*Cache::put('key','Value');*/
-
-        /*dump(Cache::get('key'));*/
-
-
-        /*Cache::put('key','Value',300);*/
-
-        /*Cache::flush();*/
-
-        /*Cache::forget('key');
-        dump(Cache::get('key'));*/
-
-        /*dump(Cache::pull('key'));
-        dump(Cache::get('key'));*/
-
 
         if (Cache::has('posts'))
         {
