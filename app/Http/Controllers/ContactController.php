@@ -8,9 +8,19 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    public function send()
+    public function send(Request $request)
     {
-        Mail::to('aaaa@q.gmail.com')->send(new TestMail());
+        if ($request->method() == 'POST')
+        {
+            $body = "<p><b>Name:</b> {$request->input('name')}</p>";
+            $body .= "<p><b>Mail:</b> {$request->input('email')}</p>";
+            $body .= "<p><b>Message:</b><br>" . nl2br($request->input('text')) . "</p>";
+
+            Mail::to('hafizhasanali99@gmail.com')->send(new TestMail($body));
+            $request->session()->flash('success', 'Message send.');
+
+            return redirect('/send');
+        }
         return view('send');
     }
 }
