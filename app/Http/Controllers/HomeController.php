@@ -45,5 +45,5 @@ class HomeController extends Controller
         return redirect()->route('home');
     }
 
-    //composer require barryvdh/laravel-debugbar --dev
+    //composer require barryvdh/laravel-debugbar --
 }
