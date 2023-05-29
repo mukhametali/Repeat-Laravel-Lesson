@@ -29,11 +29,6 @@
                         <ul class="list-unstyled">
                             <li><a href="{{ route('home') }}" class="text-white">Home</a></li>
                             <li><a href="{{ route('page.about') }}" class="text-white">About page</a></li>
-                            <li><a href="{{ route('posts.create') }}" class="text-white">Create</a></li>
-                            <li><a href="{{ route('register.create') }}" class="text-white">Register</a></li>
-                            @php
-                                dump (auth()->check())
-                            @endphp
                         </ul>
                     </div>
                 </div>
@@ -50,6 +45,26 @@
                     </svg>
                     <strong>Album</strong>
                 </a>
+
+
+                {{--@if(auth()->check())
+                    <a href="#">{{ auth()->user()->name }}</a>
+                    <li><a href="{{ route('logout') }}" class="text-white">Logout</a></li>
+                @else()
+                    <li><a href="{{ route('register.create') }}" class="text-white">Register</a></li>
+                    <li><a href="{{ route('login.create') }}" class="text-white">Login</a></li>
+                @endif--}}
+
+                @auth
+                    <a href="#">{{ auth()->user()->name }}</a>
+                    <li><a href="{{ route('logout') }}" class="text-white">Logout</a></li>
+                @endauth
+
+                @guest
+                    <li><a href="{{ route('register.create') }}" class="text-white">Register</a></li>
+                    <li><a href="{{ route('login.create') }}" class="text-white">Login</a></li>
+                @endguest
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
                         aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
