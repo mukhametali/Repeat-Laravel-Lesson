@@ -9,8 +9,6 @@
     <title>@section('title') My Site @show</title>
 
 
-
-
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 </head>
@@ -32,6 +30,10 @@
                             <li><a href="{{ route('home') }}" class="text-white">Home</a></li>
                             <li><a href="{{ route('page.about') }}" class="text-white">About page</a></li>
                             <li><a href="{{ route('posts.create') }}" class="text-white">Create</a></li>
+                            <li><a href="{{ route('register.create') }}" class="text-white">Register</a></li>
+                            @php
+                                dump (auth()->check())
+                            @endphp
                         </ul>
                     </div>
                 </div>

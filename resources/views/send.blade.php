@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title')
+@section('title')@parent:: Send mail @endsection
 
 @endsection
 
