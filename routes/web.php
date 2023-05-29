@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,14 +25,23 @@ Route::get('/page/about','PageController@show')->name('page.about');
 
 Route::match(['get', 'post'],'/send','ContactController@send');
 
-Route::get('/register','UserController@create')->name('register.create');
-Route::post('/register','UserController@store')->name('register.store');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/register','UserController@create')->name('register.create');
+    Route::post('/register','UserController@store')->name('register.store');
+    Route::get('/login','UserController@loginForm')->name('login.create');
+    Route::post('/login','UserController@login')->name('login.store');
+});
 
-Route::get('/login','UserController@loginForm')->name('login.create');
-Route::post('/login','UserController@login')->name('login.store');
-Route::get('/logout','UserController@logout')->name('logout');
 
-Route::get('/admin','Admin\MainController@index');
+Route::get('/logout','UserController@logout')->name('logout')->middleware('auth');
+Route::group([
+    'middleware' => 'admin',
+    'prefix' => 'admin',
+    'namespace' => 'Admin'
+    ], function () {
+    Route::get('/','MainController@index');
+});
+
 
 
 
